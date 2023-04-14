@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import { store } from './store/index'
 import { Navbar, Home, AddContact, EditContact, ViewDetails, ChartsAndMaps } from "./components"
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 
 function App(): JSX.Element {
   return (
@@ -17,7 +19,9 @@ function App(): JSX.Element {
                 <Route path="/addContact" element={<AddContact />} />
                 <Route path="/editContact/:id" element={<EditContact />} />
                 <Route path="/viewContact/:id" element={<ViewDetails />} />
-                <Route path="/chartsandmaps" element={<ChartsAndMaps />} />
+
+                <Route path="/chartsandmaps" element={<QueryClientProvider client={new QueryClient()}><ChartsAndMaps /></QueryClientProvider>} />
+
               </Routes>
             </div>
           </Router>
