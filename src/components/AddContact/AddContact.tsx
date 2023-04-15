@@ -62,7 +62,7 @@ const AddContact = (): JSX.Element => {
 
     // Return the JSX for the component
     return (
-        <div className=' m-6  sm:m-10 md:m-20'>
+        <div className=' m-6  mt-11 sm:m-10 md:m-20'>
             <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
                 <AccountCircle sx={{
                     color: 'action.active', mr: 1, my:
