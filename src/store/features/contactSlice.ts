@@ -8,23 +8,7 @@ interface Contact {
     email: string;
 }
 
-const initialState: Contact[] = [
-  {
-    id: 1,
-    name: 'John Doe',
-    title: 'CEO',
-    number: '123-456-7890',
-    email: 'ni@getDefaultMiddleware.com'
-  },
-  {
-    id: 2,
-    name: 'John Doe',
-    title: 'CEO',
-    number: '123-456-7840',
-    email: 'ni@getDefaultMiddleware.com'
-  },
-  
-];
+const initialState: Contact[] = [];
 
 
 export const contactSlice = createSlice({
