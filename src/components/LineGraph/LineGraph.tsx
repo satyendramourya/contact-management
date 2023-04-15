@@ -79,7 +79,7 @@ const LineGraph = () => {
             },
             title: {
                 display: true,
-                text: "Sales Data",
+                text: "Covid Cases Data",
             },
         },
     };
