@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { TextField } from '@mui/material';
 
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { addContact, deleteContact, updateContact } from '../../store/features/contactSlice';
+import { addContact } from '../../store/features/contactSlice';
 import { useAppDispatch, useAppSelector } from '../../store';
+import { useNavigate } from 'react-router-dom';
+
 
 interface Contact {
     id: number;
@@ -17,6 +19,7 @@ const AddContact = (): JSX.Element => {
     const [title, setTitle] = useState("");
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
+    const navigate = useNavigate();
 
 
     const contact = useAppSelector((state: { contact: Contact[] }) => state);
@@ -43,6 +46,7 @@ const AddContact = (): JSX.Element => {
         }
 
         dispatch(addContact(data));
+        navigate("/");
     }
 
     return (

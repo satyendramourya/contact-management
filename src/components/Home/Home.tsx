@@ -29,7 +29,7 @@ const Home = (): JSX.Element => {
                 <div className='flex flex-col gap-2 m-4 md:m-14' >
                     {contact.map((item: Contact, index: number) => {
                         return (
-                            <Link key={item.id} to={`/viewContact/:${item.id}`}>
+                            <Link key={item.id} to={`/viewContact/${item.id}`}>
                                 <div className='flex flex-row font-semibold items-center justify-start gap-3' >
                                     <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5, fontSize: "50px" }} />
                                     <h1>{item.name}</h1>

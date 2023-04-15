@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { TextField } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import { useNavigate } from 'react-router-dom';
 
 
 interface Contact {
@@ -25,11 +26,11 @@ const ViewDetails = () => {
     const contactId = Number(id);
     const contacts = useAppSelector((state: { contact: Contact[] }) => state);
     const currentContact = contacts.contact.find((item: Contact) => item.id === contactId);
+    const navigate = useNavigate();
 
     const delContact = () => {
         dispatch(deleteContact(contactId));
-        // alert with button for going back to home
-        alert('Contact Deleted');
+        navigate('/');
 
     }
 

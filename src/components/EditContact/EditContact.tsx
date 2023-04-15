@@ -6,6 +6,7 @@ import { updateContact } from '../../store/features/contactSlice';
 import { TextField } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import { useNavigate } from 'react-router-dom';
 
 interface Contact {
     id: number;
@@ -21,6 +22,7 @@ const EditContact = (): JSX.Element => {
     const [title, setTitle] = useState("");
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
+    const navigate = useNavigate();
 
     const { id } = useParams<{ id: string }>();
     const contactId = Number(id);
@@ -61,6 +63,7 @@ const EditContact = (): JSX.Element => {
         }
 
         dispatch(updateContact(data));
+        navigate("/");
     }
 
 

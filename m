@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { useQuery } from 'react-query';
-import { LatLngExpression } from 'leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -14,6 +13,8 @@ interface Country {
     recovered: number;
     deaths: number;
 }
+
+
 
 const CovidMap: React.FC = () => {
     const { isLoading, isError, data } = useQuery<Country[]>('covidData', async () => {
@@ -34,11 +35,13 @@ const CovidMap: React.FC = () => {
         tooltipAnchor: [16, -28],
     });
 
-    const center: LatLngExpression = [51.505, -0.09];
     return (
         <div className="h-screen">
-            <MapContainer className="h-full" center={[0, 0]} zoom={2}>
-                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <MapContainer className="" center={[0, 0]} zoom={2}>
+                <TileLayer
+                    url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=kUceROTAb2mxAhPtV5Za"
+                    attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+                />
                 {data?.map((country) => (
                     <Marker key={country.country} position={[country.countryInfo.lat, country.countryInfo.long]} icon={markerIcon}>
                         <Popup className="bg-white p-4 rounded-md shadow-md">
