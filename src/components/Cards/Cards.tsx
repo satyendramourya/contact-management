@@ -1,19 +1,24 @@
+// Importing React and the useQuery hook from react-query
 import React from 'react';
 import { useQuery } from 'react-query';
 
+// Creating an interface for the WorldData object
 interface WorldData {
     deaths: number;
     recovered: number;
     cases: number;
 }
 
+// Defining the Cards component as a functional component
 const Cards: React.FC = () => {
+    // Fetching data using the useQuery hook and setting it to the worldData constant
     const { data: worldData } = useQuery<WorldData>('worldData', async () => {
         const response = await fetch('https://disease.sh/v3/covid-19/all');
         const data = await response.json();
         return data;
     });
 
+    // Rendering the component with the fetched data
     return (
         <div>
             {worldData && (

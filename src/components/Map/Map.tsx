@@ -1,9 +1,10 @@
+// Importing required modules
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { useQuery } from 'react-query';
-import { LatLngExpression } from 'leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+// Defining Country interface
 interface Country {
     country: string;
     countryInfo: {
@@ -15,17 +16,22 @@ interface Country {
     deaths: number;
 }
 
+// Defining CovidMap functional component
 const CovidMap: React.FC = () => {
+    // Fetching data using useQuery hook from react-query library
     const { isLoading, isError, data } = useQuery<Country[]>('covidData', async () => {
         const response = await fetch('https://disease.sh/v3/covid-19/countries');
         const data = await response.json();
         return data;
     });
 
+    // Displaying loading message if data is still being fetched
     if (isLoading) return <div className="text-center">Loading...</div>;
 
+    // Displaying error message if there is an error while fetching data
     if (isError) return <div className="text-center">Error loading data</div>;
 
+    // Defining marker icon using Leaflet's L.icon() method
     const markerIcon = L.icon({
         iconUrl: 'location-pin.png',
         iconSize: [25, 41],
@@ -34,7 +40,8 @@ const CovidMap: React.FC = () => {
         tooltipAnchor: [16, -28],
     });
 
-    const center: LatLngExpression = [51.505, -0.09];
+
+    // Rendering MapContainer and displaying markers for each country in fetched data
     return (
         <div className="h-screen">
             <MapContainer className="h-full" center={[0, 0]} zoom={2}>
@@ -54,6 +61,6 @@ const CovidMap: React.FC = () => {
             </MapContainer>
         </div>
     );
-};
+}
 
 export default CovidMap;

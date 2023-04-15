@@ -6,37 +6,46 @@ import { addContact } from '../../store/features/contactSlice';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { useNavigate } from 'react-router-dom';
 
-
+// Define a TypeScript interface for the contact object
 interface Contact {
     id: number;
     name: string;
     number: string;
 }
 
+// Define the AddContact component using a functional component with the TypeScript syntax
 const AddContact = (): JSX.Element => {
+    // Import Redux hooks for dispatching actions and selecting data from the store
     const dispatch = useAppDispatch();
+    const contact = useAppSelector((state: { contact: Contact[] }) => state);
+
+    // Define the component state using the useState hook
     const [name, setName] = useState("");
     const [title, setTitle] = useState("");
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
+
+    // Import the useNavigate hook from React Router
     const navigate = useNavigate();
 
-
-    const contact = useAppSelector((state: { contact: Contact[] }) => state);
-
+    // Define the submit handler for the form
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        // Prevent the default form submission behavior
         e.preventDefault();
+        // Check if all the required fields are filled
         if (!name || !title || !number || !email) {
             alert("Please fill all the fields");
             return;
         }
 
+        // Check if the contact already exists using the find method of the Array object
         const checkNumber = contact.contact.find((item: Contact) => item.number === (number));
         if (checkNumber) {
             alert("Number already exists");
             return;
         }
 
+        // Define a new contact object using the input values and the current length of the contact list
         const data = {
             id: contact.contact.length + 1,
             name,
@@ -45,10 +54,13 @@ const AddContact = (): JSX.Element => {
             email
         }
 
+        // Dispatch the addContact action to the Redux store
         dispatch(addContact(data));
+        // Navigate to the home page using the useNavigate hook
         navigate("/");
     }
 
+    // Return the JSX for the component
     return (
         <div className=' m-6  sm:m-10 md:m-20'>
             <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
